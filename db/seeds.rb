@@ -20,16 +20,15 @@ end
 
 # CREATE CITIES
 
-new_york_city = nil, rome = nil, mexico_city = nil, los_angeles = nil, tokyo = nil, paris = nil, london = nil
 1.times do
-    new_york_city = Location.create(name: "New York City", image: "https://images.unsplash.com/flagged/photo-1575597255483-55f2afb6f42c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
-    rome = Location.create(name: "Rome", image: "https://images.unsplash.com/photo-1529155157179-963abcaa4949?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    Location.create(name: "New York City", image: "https://images.unsplash.com/flagged/photo-1575597255483-55f2afb6f42c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
+    Location.create(name: "Rome", image: "https://images.unsplash.com/photo-1529155157179-963abcaa4949?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1000&h=1000&q=100")
     # rome alt img https://images.unsplash.com/photo-1529260830199-42c24126f198?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
-    mexico_city = Location.create(name: "Mexico City", image: "https://images.unsplash.com/photo-1518659526054-190340b32735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-    los_angeles = Location.create(name: "Los Angeles", image: "https://images.unsplash.com/photo-1506190503914-c7c7a69d4ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
-    tokyo = Location.create(name: "Tokyo", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-    paris = Location.create(name: "Paris", image: "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-    london = Location.create(name: "London", image: "https://images.unsplash.com/photo-1503780099440-e6ab046a1d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
+    Location.create(name: "Mexico City", image: "https://images.unsplash.com/photo-1518659526054-190340b32735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    Location.create(name: "Los Angeles", image: "https://images.unsplash.com/photo-1506190503914-c7c7a69d4ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
+    Location.create(name: "Tokyo", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    Location.create(name: "Paris", image: "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    Location.create(name: "London", image: "https://images.unsplash.com/photo-1503780099440-e6ab046a1d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
 end
 
 ##############################################################################################################
@@ -53,6 +52,7 @@ end
 # CREATE EXPERIENCES
 
 1.times do
+
     new_york_city_experience_templates = [
         {
             name: "See It All in a Day",
@@ -234,7 +234,7 @@ end
     end
 
     puts "Creating experiences for New York City..."
-    new_york_city_experience_templates.each { |exp| create_new_experiences(exp, new_york_city, filler_descriptions) }
+    new_york_city_experience_templates.each { |exp| create_new_experiences(exp, Location.find(1), filler_descriptions) }
 
 end
 
@@ -286,14 +286,12 @@ end
     end
 end
 
-# create_events
-
 ##############################################################################################################
 
 # CREATE USERS
 
 puts "Creating users..."
-20.times do
+10.times do
     User.create(name: Faker::Name.name, password: "123")
 end
 
@@ -303,37 +301,32 @@ end
 
 puts "Creating favorites..."
 User.all.each do |user|
-    6.times do
+    8.times do
         Favorite.create(user_id: user.id, experience_id: Experience.all.sample.id)
     end
 end
 
 ##############################################################################################################
 
-# CREATE SAVES
+# CREATE SAVES AND TRIPS
     # does not check to limit number of saves which is ok for now because :booked is false by default
+    # creates a new trip for each booked event which isn't ideal
 
-puts "Creating saves..."
-# 1.times do
-    def create_save(user, faves, which_favorite)
-        Save.create(
-            user_id: user.id, 
-            event_id: user.favorites[which_favorite].experience.events.sample.id, 
-            number_of_guests: (rand 1..8)
-        )
+1.times do
+    puts "Creating saves..."
+    def create_save(user, faves, event)
+        new_save = Save.new(user_id: user.id, event_id: event.id, number_of_guests: (rand 1..8))
+        new_trip = Trip.create(user_id: user.id, name: "#{event.start_at.strftime("%B")} #{event.experience.location.name} Trip")
+        new_save.trip_id = new_trip.id
+        new_save.save
     end
 
     User.all.each do |user|
-        # byebug
         faves = user.favorites.count
-        create_save(user, faves, (rand 0..((faves / 2) - 1)))
-        create_save(user, faves, (rand (faves / 2)..(faves - 1)))
+        create_save(user, faves, (user.favorites[rand 0..((faves / 2) - 1)].experience.events.sample))
+        create_save(user, faves, (user.favorites[rand (faves / 2)..(faves - 1)].experience.events.sample))
+        user.saves.sample.book
+        # byebug
     end
-# end
-
-##############################################################################################################
-
-# CREATE TRIPS
-
-
+end
 
