@@ -64,13 +64,13 @@ ActiveRecord::Schema.define(version: 2020_02_08_163405) do
 
   create_table "saves", force: :cascade do |t|
     t.boolean "booked", default: false
+    t.integer "number_of_guests"
     t.bigint "event_id", null: false
     t.bigint "user_id", null: false
-    t.bigint "trip_id", null: false
+    t.integer "trip_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["event_id"], name: "index_saves_on_event_id"
-    t.index ["trip_id"], name: "index_saves_on_trip_id"
     t.index ["user_id"], name: "index_saves_on_user_id"
   end
 
@@ -95,7 +95,6 @@ ActiveRecord::Schema.define(version: 2020_02_08_163405) do
   add_foreign_key "favorites", "experiences"
   add_foreign_key "favorites", "users"
   add_foreign_key "saves", "events"
-  add_foreign_key "saves", "trips"
   add_foreign_key "saves", "users"
   add_foreign_key "trips", "users"
 end
