@@ -1,6 +1,10 @@
-# Seed data includes: 20 experiences for new york, each with one or more events / week through 2020
+############################################################################################################
 
-# delete all existing data
+# SEED DATA INCLUDES: 20 EXPERIENCES FOR NEW YORK, EACH WITH ONE OR MORE EVENTS / WEEK THROUGH 2020
+
+############################################################################################################
+
+# DELETE ALL EXISTING DATA
 1.times do
     User.destroy_all
     Event.destroy_all
@@ -11,9 +15,13 @@
     Trip.destroy_all
 end
 
-# create locations and categories
+############################################################################################################
+
+# CREATE TEMPLATE DATA FOR CITIES, CATEGORIES, DESCRIPTIONS, EXPERIENCES
+
 new_york_city = nil, rome = nil, mexico_city = nil, los_angeles = nil, tokyo = nil, paris = nil, london = nil
 food = nil, outdoors = nil, culture = nil, nightlife = nil, history = nil
+
 1.times do
     new_york_city = Location.create(name: "New York City", image: "https://images.unsplash.com/flagged/photo-1575597255483-55f2afb6f42c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
     rome = Location.create(name: "Rome", image: "https://images.unsplash.com/photo-1529155157179-963abcaa4949?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1000&h=1000&q=100")
@@ -35,7 +43,6 @@ food = nil, outdoors = nil, culture = nil, nightlife = nil, history = nil
     # historical alt img https://images.unsplash.com/photo-1575379972263-2f15a5c78236?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
 end
 
-# filler descriptions
 lorem_hipsums = [
     "Lorem ipsum dolor amet roof party typewriter 3 wolf moon, mollit cold-pressed helvetica venmo waistcoat hexagon sustainable affogato eu kitsch ramps. Keffiyeh cronut lyft williamsburg swag. Duis iceland minim four dollar toast, ad celiac hexagon chia synth unicorn. Officia ennui in quinoa reprehenderit ut fixie pug tbh velit. Venmo esse live-edge, cliche veniam craft beer unicorn meggings nulla banh mi snackwave scenester godard. Do ennui meh venmo poutine occaecat bicycle rights live-edge eu humblebrag tempor.",
     "Lorem ipsum dolor amet ut gochujang +1 hella food truck hot chicken duis cloud bread godard in tempor kale chips. Lo-fi 90's jianbing hot chicken four loko flexitarian la croix officia lomo, excepteur deep v retro hexagon. Tote bag truffaut you probably haven't heard of them drinking vinegar, jean shorts polaroid non kickstarter dreamcatcher dolor. VHS ut sartorial sriracha.",
@@ -51,7 +58,6 @@ lorem_hipsums = [
     "Lorem ipsum dolor amet fugiat beard echo park, cliche subway tile trust fund fixie biodiesel. Chartreuse af freegan hoodie woke. Pour-over aliqua sed ipsum celiac migas knausgaard ugh. Ramps nostrud echo park, mollit intelligentsia XOXO knausgaard laboris whatever scenester. Synth etsy duis gentrify kale chips."
 ]
 
-# template data for experiences
 new_york_city_experiences_templates = [
     {
         name: "See It All in a Day",
@@ -179,6 +185,7 @@ new_york_city_experiences_templates = [
         description: "The city is the unofficial star of both Sex and the City and Gossip Girl, and the On Location Tours of each show’s hotspots will transport fans to familiar places throughout Manhattan. Sip cosmos, walk past Carrie’s famous brownstone, and enjoy retail therapy in Greenwich Village boutiques. Fans of Blair and Chuck can tour iconic Gossip Girl sites on the Upper East Side like the Met Steps, Dylan’s Candy Bar, the Empire Hotel, and of course, Central Park."
     }
 ]
+
 experiences_london = [
     {
         name: "",
@@ -189,6 +196,10 @@ experiences_london = [
         host: nil
     },  
 ]
+
+############################################################################################################
+
+# CREATE EXPERIENCES
 
 def create_new_experiences(template_experience, location, descriptions)
 
@@ -217,8 +228,11 @@ def create_new_experiences(template_experience, location, descriptions)
     end
 end
 
-# create all experiences
 new_york_city_experiences_templates.each { |exp| create_new_experiences(exp, new_york_city, lorem_hipsums) }
+
+############################################################################################################
+
+# CREATE EVENTS (THROUGH 2020)
 
 def create_one_event(experience, datetime, length)
     Event.create(
@@ -227,7 +241,8 @@ def create_one_event(experience, datetime, length)
         experience_id: experience.id
     )
 end
-def create_events()
+
+def create_events
     # set the most common first day, frequency, start and end times
     first_day = rand 1..4
     interval = rand 3..7
@@ -261,20 +276,33 @@ def create_events()
     end
 end
 
-# create all events through 2020
-create_events()
+create_events
 
-# create users
+############################################################################################################
+
+# CREATE USERS
+
+50.times do
+    User.create(name: Faker::Name.name, password: "123")
+end
+
+############################################################################################################
+
+# CREATE FAVORITES
+
+User.all.each do |user|
+    10.times do
+        Favorite.create(user_id: user.id, experience_id: Experience.all.sample.id)
+    end
+end
+
+############################################################################################################
+
+# CREATE SAVES
 
 
 
-# create favorites
+############################################################################################################
 
-
-
-# create saves
-
-
-
-# create trips
+# CREATE TRIPS
 

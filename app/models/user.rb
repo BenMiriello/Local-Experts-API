@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_secure_password
 
     has_many :favorites, dependent: :destroy
     has_many :favorited_experiences, through: :favorites, source: :experience
