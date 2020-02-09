@@ -1,42 +1,39 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# Seed data includes: 20 experiences for new york, each with one or more events / week through 2020
 
+# delete all existing data
+1.times do
+    User.destroy_all
+    Event.destroy_all
+    Experience.destroy_all
+    Location.destroy_all
+    Favorite.destroy_all
+    Save.destroy_all
+    Trip.destroy_all
+end
 
+# create locations and categories
+new_york_city = nil, rome = nil, mexico_city = nil, los_angeles = nil, tokyo = nil, paris = nil, london = nil
+food = nil, outdoors = nil, culture = nil, nightlife = nil, history = nil
+1.times do
+    new_york_city = Location.create(name: "New York City", image: "https://images.unsplash.com/flagged/photo-1575597255483-55f2afb6f42c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
+    rome = Location.create(name: "Rome", image: "https://images.unsplash.com/photo-1529155157179-963abcaa4949?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    # rome alt img https://images.unsplash.com/photo-1529260830199-42c24126f198?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
+    mexico_city = Location.create(name: "Mexico City", image: "https://images.unsplash.com/photo-1518659526054-190340b32735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    los_angeles = Location.create(name: "Los Angeles", image: "https://images.unsplash.com/photo-1506190503914-c7c7a69d4ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
+    tokyo = Location.create(name: "Tokyo", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    paris = Location.create(name: "Paris", image: "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    london = Location.create(name: "London", image: "https://images.unsplash.com/photo-1503780099440-e6ab046a1d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
 
-# NOTE: resetting db might not work because of dependencies and order of destroy_alls. 
-# If it won't seed again, try rolling back all migrations, dropping the db, the starting over from there.
-User.destroy_all
-Event.destroy_all
-Experience.destroy_all
-Location.destroy_all
-Favorite.destroy_all
-Save.destroy_all
-Trip.destroy_all
-
-# create locations
-new_york_city = Location.create(name: "New York City", image: "https://images.unsplash.com/flagged/photo-1575597255483-55f2afb6f42c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
-rome = Location.create(name: "Rome", image: "https://images.unsplash.com/photo-1529155157179-963abcaa4949?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1000&h=1000&q=100")
-# rome alt img https://images.unsplash.com/photo-1529260830199-42c24126f198?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
-mexico_city = Location.create(name: "Mexico City", image: "https://images.unsplash.com/photo-1518659526054-190340b32735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-los_angeles = Location.create(name: "Los Angeles", image: "https://images.unsplash.com/photo-1506190503914-c7c7a69d4ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
-tokyo = Location.create(name: "Tokyo", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-paris = Location.create(name: "Paris", image: "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-london = Location.create(name: "London", image: "https://images.unsplash.com/photo-1503780099440-e6ab046a1d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
-
-# create categories
-food = Category.create(name: "Food", image: "https://images.unsplash.com/photo-1547573854-74d2a71d0826?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-outdoors = Category.create(name: "Outdoors", image: "https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-culture = Category.create(name: "Culture", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-nightlife = Category.create(name: "Nightlife", image: "https://images.unsplash.com/photo-1497911174120-042e550e7e0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-# nightlife alt img https://images.unsplash.com/photo-1562049070-7e003d30a3d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
-# nightlife alt img https://images.unsplash.com/photo-1541532713592-79a0317b6b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
-history = Category.create(name: "Historical", image: "https://images.unsplash.com/photo-1569759276108-31b8e7e43e7b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-# historical alt img https://images.unsplash.com/photo-1575379972263-2f15a5c78236?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
+    # create categories
+    food = Category.create(name: "Food", image: "https://images.unsplash.com/photo-1547573854-74d2a71d0826?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    outdoors = Category.create(name: "Outdoors", image: "https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    culture = Category.create(name: "Culture", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    nightlife = Category.create(name: "Nightlife", image: "https://images.unsplash.com/photo-1497911174120-042e550e7e0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    # nightlife alt img https://images.unsplash.com/photo-1562049070-7e003d30a3d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
+    # nightlife alt img https://images.unsplash.com/photo-1541532713592-79a0317b6b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
+    history = Category.create(name: "Historical", image: "https://images.unsplash.com/photo-1569759276108-31b8e7e43e7b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    # historical alt img https://images.unsplash.com/photo-1575379972263-2f15a5c78236?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
+end
 
 # filler descriptions
 lorem_hipsums = [
@@ -54,8 +51,8 @@ lorem_hipsums = [
     "Lorem ipsum dolor amet fugiat beard echo park, cliche subway tile trust fund fixie biodiesel. Chartreuse af freegan hoodie woke. Pour-over aliqua sed ipsum celiac migas knausgaard ugh. Ramps nostrud echo park, mollit intelligentsia XOXO knausgaard laboris whatever scenester. Synth etsy duis gentrify kale chips."
 ]
 
-# experience templates
-experiences_new_york_city = [
+# template data for experiences
+new_york_city_experiences_templates = [
     {
         name: "See It All in a Day",
         quota: 15,
@@ -171,7 +168,8 @@ experiences_new_york_city = [
         quota: 20,
         category: culture,
         image: "https://www.fodors.com/wp-content/uploads/2018/09/Unique-NYC-Tours-Kenny-Kramer-Reality-Tour-975x650.jpg",
-        description: "None other than the real Kenny Kramer himself leads the most uniquely authentic Seinfeld tour in town. The Kenny Kramer Reality Tour is a theatrical multi-media tour that delves into the story behind the show, as well the history of Kramer himself. The bus tour winds its way through the city, visiting all the sites made famous in the most popular sitcom of the 1990s, including Monk’s Restaurant, and the Soup Shop."
+        description: "None other than the real Kenny Kramer himself leads the most uniquely authentic Seinfeld tour in town. The Kenny Kramer Reality Tour is a theatrical multi-media tour that delves into the story behind the show, as well the history of Kramer himself. The bus tour winds its way through the city, visiting all the sites made famous in the most popular sitcom of the 1990s, including Monk’s Restaurant, and the Soup Shop.",
+        host_name: "Kenny Kramer"
     },
     {
         name: "Sex and the City Tour",
@@ -181,84 +179,102 @@ experiences_new_york_city = [
         description: "The city is the unofficial star of both Sex and the City and Gossip Girl, and the On Location Tours of each show’s hotspots will transport fans to familiar places throughout Manhattan. Sip cosmos, walk past Carrie’s famous brownstone, and enjoy retail therapy in Greenwich Village boutiques. Fans of Blair and Chuck can tour iconic Gossip Girl sites on the Upper East Side like the Met Steps, Dylan’s Candy Bar, the Empire Hotel, and of course, Central Park."
     }
 ]
+experiences_london = [
+    {
+        name: "",
+        quota: nil,
+        category: nil,
+        image: "",
+        description: "",
+        host: nil
+    },  
+]
 
-# create all experiences from templates
-experiences_new_york_city.each do |exp_template|
+def create_new_experiences(template_experience, location, descriptions)
 
-    new_experience = Experience.new({
-        name: exp_template[:name],
-        quota: exp_template[:quota],
-        category: exp_template[:category],
-        image: exp_template[:image],
-    })
-
-    if exp_template[:description]
-        new_experience.description = exp_template[:description]
+    if template_experience[:description]
+        description = template_experience[:description]
     else
-        new_experience.description = lorem_hipsums.sample
+        description = descriptions.sample
     end
 
-    new_experience.location = new_york_city
+    if template_experience[:host_name]
+        host_name = template_experience[:host_name]
+    else
+        host_name = Faker::Name.name
+    end
 
-    new_experience.save
+    if template_experience
+        Experience.create({
+            name: template_experience[:name],
+            quota: template_experience[:quota],
+            category: template_experience[:category],
+            image: template_experience[:image],
+            description: description,
+            host_name: host_name,
+            location_id: location.id
+        })
+    end
 end
 
-Experience.all.each do |experience|
-    # byebug
+# create all experiences
+new_york_city_experiences_templates.each { |exp| create_new_experiences(exp, new_york_city, lorem_hipsums) }
 
+def create_one_event(experience, datetime, length)
+    Event.create(
+        start_at: datetime, 
+        end_at: datetime + length/24.0, 
+        experience_id: experience.id
+    )
+end
+def create_events()
     # set the most common first day, frequency, start and end times
     first_day = rand 1..4
     interval = rand 3..7
     start_at = rand 10..14
     length = rand 2..3
-    
-    # edit a few categories that need to be at a certain time or day of week
-    if experience.category[:name] == "Food"
-        start_at = 19
-        length = 3
-    elsif experience.category[:name] == "Outdoors"
-        length = rand 2..4
-    elsif experience.category[:name] == "Nightlife"
-        first_day = rand 3..4
-        interval = 7
-        start_at = 21
-        length = 3
+    Experience.all.each do |experience|
+        
+        # edit a few categories that need to be at a certain time or day of week
+        if experience.category[:name] == "Food"
+            start_at = 19
+            length = 3
+        elsif experience.category[:name] == "Outdoors"
+            length = rand 2..4
+        elsif experience.category[:name] == "Nightlife"
+            first_day = rand 3..4
+            interval = 7
+            start_at = 21
+            length = 3
+        end
+        
+        # create the first event
+        datetime = DateTime.new(2020,1,first_day,start_at)
+        # byebug
+        create_one_event(experience, datetime, length)
+        
+        # create the all the events for this experience until the end of the year
+        while datetime.year == 2020
+            datetime += interval
+            create_one_event(experience, datetime, length)
+        end
     end
-    def create_new_event(experience, datetime, length)
-        new_event = Event.new(
-            start_at: datetime, 
-            end_at: datetime + length/24.0, 
-            experience_id: experience.id
-        )
-        # new_event.experience = experience
-        new_event.save
-    end
-    
-    # create the first event
-    datetime = DateTime.new(2020,1,first_day,start_at)
-    # byebug
-    create_new_event(experience, datetime, length)
-    
-    # create the all the events for this experience until the end of the year
-    while datetime.year == 2020
-        datetime += interval
-        create_new_event(experience, datetime, length)
-    end
-
 end
 
+# create all events through 2020
+create_events()
 
-# experiences_london = [
-    # {
-    #     name: ""
-    #     quota: ,
-    #     category: ,
-    #     image: "",
-    #     description: 
-    # },
-# ]
+# create users
 
 
 
-# add later: 
-    # host with image, name, bio (experience belongs to host)
+# create favorites
+
+
+
+# create saves
+
+
+
+# create trips
+

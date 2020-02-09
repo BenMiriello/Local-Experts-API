@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_02_08_163405) do
     t.string "description"
     t.string "quota"
     t.string "image"
+    t.string "host_name"
     t.bigint "category_id", null: false
     t.bigint "location_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -62,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_02_08_163405) do
   end
 
   create_table "saves", force: :cascade do |t|
-    t.boolean "booked"
+    t.boolean "booked", default: false
     t.bigint "event_id", null: false
     t.bigint "user_id", null: false
     t.bigint "trip_id", null: false

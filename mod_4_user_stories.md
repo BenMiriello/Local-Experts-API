@@ -73,10 +73,22 @@ Stretch: have map on user's page that shows their scheduled tours and elsewhere 
 
 Weekend plan:
 
-- seed data
+BACK END
 
-- 
+- DONE - nyc seed data
+
+- DONE - events for experiences created (experience has a photo and description and name, and h)
+
+
+
+FRONT END
 
 - build scaffold for front end
 
 - 
+
+
+
+# add later: 
+    # host with image, name, bio (experience belongs to host)
+

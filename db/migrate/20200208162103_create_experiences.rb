@@ -5,6 +5,7 @@ class CreateExperiences < ActiveRecord::Migration[6.0]
       t.string :description
       t.string :quota
       t.string :image
+      t.string :host_name
 
       t.belongs_to :category, null: false, foreign_key: true
       t.belongs_to :location, null: false, foreign_key: true
@@ -13,3 +14,4 @@ class CreateExperiences < ActiveRecord::Migration[6.0]
     end
   end
 end
+
