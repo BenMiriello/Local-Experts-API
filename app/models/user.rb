@@ -20,6 +20,30 @@ class User < ApplicationRecord
     def saved_experiences
         self.saved_events.map { |event| event.experience }
     end
+
+    def booked_saves
+        self.saves.where(booked: true)
+    end
+
+    def booked_events
+        self.booked_saves.map { |save| save.event }
+    end
+
+    def booked_experiences
+        self.booked_events.map { |event| event.experience }
+    end
+
+    def unbooked_saves
+        self.saves.where(booked: false)
+    end
+
+    def unbooked_events
+        self.unbooked_saves.map { |save| save.event }
+    end
+
+    def unbooked_experiences
+        self.unbooked_events.map { |event| event.experience }
+    end
     
 end
 
