@@ -3,10 +3,11 @@ class Event < ApplicationRecord
     belongs_to :experience
 
     has_many :saves, dependent: :destroy
-    
-    # For some reason, these instance methods only worked after resetting the db. 
-    # Just fyi if you want to add more. 
-    # Add the method then run 'rails db:reset' and you should be all good.
+
+    def saves
+        Save.where(event_id: self.id)
+    end
+
     def name
         self.experience.name
     end
@@ -23,7 +24,7 @@ class Event < ApplicationRecord
         @spots_left = self.experience.quota
         if self.saves.count >= 1
             self.saves.each do |save|
-                @spots_left -= save.guests
+                @spots_left -= save.number_of_guests
             end
         end
         @spots_left

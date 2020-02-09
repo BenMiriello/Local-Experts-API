@@ -44,6 +44,14 @@ class User < ApplicationRecord
     def unbooked_experiences
         self.unbooked_events.map { |event| event.experience }
     end
+
+    def visited_cities
+        # return booked events that have already happened
+    end
+
+    def past_trips
+        # trips where each event's end time is in the past
+    end
     
 end
 

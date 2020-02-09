@@ -3,7 +3,7 @@ class CreateExperiences < ActiveRecord::Migration[6.0]
     create_table :experiences do |t|
       t.string :name
       t.string :description
-      t.string :quota
+      t.integer :quota
       t.string :image
       t.string :host_name
 

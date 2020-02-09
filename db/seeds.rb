@@ -23,7 +23,7 @@ end
 1.times do
     Location.create(name: "New York City", image: "https://images.unsplash.com/flagged/photo-1575597255483-55f2afb6f42c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
     Location.create(name: "Rome", image: "https://images.unsplash.com/photo-1529155157179-963abcaa4949?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1000&h=1000&q=100")
-    # rome alt img https://images.unsplash.com/photo-1529260830199-42c24126f198?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
+        # rome alt img https://images.unsplash.com/photo-1529260830199-42c24126f198?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
     Location.create(name: "Mexico City", image: "https://images.unsplash.com/photo-1518659526054-190340b32735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
     Location.create(name: "Los Angeles", image: "https://images.unsplash.com/photo-1506190503914-c7c7a69d4ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
     Location.create(name: "Tokyo", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
@@ -41,10 +41,10 @@ food = nil, outdoors = nil, culture = nil, nightlife = nil, history = nil
     outdoors = Category.create(name: "Outdoors", image: "https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
     culture = Category.create(name: "Culture", image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
     nightlife = Category.create(name: "Nightlife", image: "https://images.unsplash.com/photo-1497911174120-042e550e7e0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-    # nightlife alt img https://images.unsplash.com/photo-1562049070-7e003d30a3d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
-    # nightlife alt img https://images.unsplash.com/photo-1541532713592-79a0317b6b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
+        # nightlife alt img https://images.unsplash.com/photo-1562049070-7e003d30a3d9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
+        # nightlife alt img https://images.unsplash.com/photo-1541532713592-79a0317b6b77?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
     history = Category.create(name: "Historical", image: "https://images.unsplash.com/photo-1569759276108-31b8e7e43e7b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-    # historical alt img https://images.unsplash.com/photo-1575379972263-2f15a5c78236?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
+        # historical alt img https://images.unsplash.com/photo-1575379972263-2f15a5c78236?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
 end
 
 ##############################################################################################################

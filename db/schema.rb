@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 2020_02_08_163405) do
   create_table "experiences", force: :cascade do |t|
     t.string "name"
     t.string "description"
-    t.string "quota"
+    t.integer "quota"
     t.string "image"
     t.string "host_name"
     t.bigint "category_id", null: false
