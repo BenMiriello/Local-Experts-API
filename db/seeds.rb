@@ -20,15 +20,16 @@ end
 
 # CREATE CITIES
 
+new_york_city = nil, rome = nil, mexico_city = nil, los_angeles = nil, tokyo = nil, paris = nil, london = nil
 1.times do
-    Location.create(name: "New York City", image: "https://images.unsplash.com/flagged/photo-1575597255483-55f2afb6f42c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
-    Location.create(name: "Rome", image: "https://images.unsplash.com/photo-1529155157179-963abcaa4949?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    new_york_city = Location.create(name: "New York City", image: "https://images.unsplash.com/flagged/photo-1575597255483-55f2afb6f42c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
+    rome = Location.create(name: "Rome", image: "https://images.unsplash.com/photo-1529155157179-963abcaa4949?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1000&h=1000&q=100")
         # rome alt img https://images.unsplash.com/photo-1529260830199-42c24126f198?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100
-    Location.create(name: "Mexico City", image: "https://images.unsplash.com/photo-1518659526054-190340b32735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-    Location.create(name: "Los Angeles", image: "https://images.unsplash.com/photo-1506190503914-c7c7a69d4ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
-    Location.create(name: "Tokyo", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-    Location.create(name: "Paris", image: "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
-    Location.create(name: "London", image: "https://images.unsplash.com/photo-1503780099440-e6ab046a1d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
+    mexico_city = Location.create(name: "Mexico City", image: "https://images.unsplash.com/photo-1518659526054-190340b32735?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    los_angeles = Location.create(name: "Los Angeles", image: "https://images.unsplash.com/photo-1506190503914-c7c7a69d4ce5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
+    tokyo = Location.create(name: "Tokyo", image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    paris = Location.create(name: "Paris", image: "https://images.unsplash.com/photo-1522093007474-d86e9bf7ba6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1000&h=1000&q=100")
+    london = Location.create(name: "London", image: "https://images.unsplash.com/photo-1503780099440-e6ab046a1d71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&h=1000&q=100")
 end
 
 ##############################################################################################################
@@ -181,6 +182,36 @@ end
         }
     ]
 
+    nyc_map_boxes = [
+        {
+            name: "Downtown Manhattan",
+            lat1: 40710517,
+            lat2: 40750084,
+            lon1: 73978608,
+            lon2: 74008518,
+            lat_modifier: 1,
+            lon_modifier: -1
+        },
+        {
+            name: "Midtown",
+            lat1: 40748465,
+            lat2: 40775325,
+            lon1: 73967365,
+            lon2: 73989939,
+            lat_modifier: 1,
+            lon_modifier: -1
+        },
+        {
+            name: "Downtown Brooklyn",
+            lat1: 40663646,
+            lat2: 40698866,
+            lon1: 73960206,
+            lon2: 73997525,
+            lat_modifier: 1,
+            lon_modifier: -1
+        }
+    ]
+
     london_experience_templates = [
         {
             name: "",
@@ -207,7 +238,7 @@ end
         "Lorem ipsum dolor amet fugiat beard echo park, cliche subway tile trust fund fixie biodiesel. Chartreuse af freegan hoodie woke. Pour-over aliqua sed ipsum celiac migas knausgaard ugh. Ramps nostrud echo park, mollit intelligentsia XOXO knausgaard laboris whatever scenester. Synth etsy duis gentrify kale chips."
     ]
 
-    def create_new_experiences(template_experience, location, descriptions)
+    def create_new_experiences(template_experience, location, descriptions, map_boxes)
         if template_experience[:description]
             description = template_experience[:description]
         else
@@ -220,6 +251,9 @@ end
             host_name = Faker::Name.name
         end
 
+        start_box = map_boxes.sample
+        end_box = map_boxes.sample
+
         if template_experience
             Experience.create({
                 name: template_experience[:name],
@@ -228,13 +262,25 @@ end
                 image: template_experience[:image],
                 description: description,
                 host_name: host_name,
-                location_id: location.id
+                location_id: location.id,
+                start_lat: ((rand (start_box[:lat1]..start_box[:lat2]))*0.000001*start_box[:lat_modifier]),
+                start_lon: ((rand (end_box[:lon1]..end_box[:lon2]))*0.000001*start_box[:lon_modifier]),
+                end_lat: ((rand (start_box[:lat1]..start_box[:lat2]))*0.000001*end_box[:lat_modifier]),
+                end_lon: ((rand (end_box[:lon1]..end_box[:lon2]))*0.000001*end_box[:lon_modifier])
+                # lat: (
+                #     (rand (start_box[:lat1]..start_box[:lat2]))*0.000001*start_box[:lat_modifier]),
+                #     (rand (end_box[:lon1]..end_box[:lon2]))*0.000001*start_box[:lon_modifier])
+                # )
+                # lon: (
+                #     (rand (start_box[:lat1]..start_box[:lat2]))*0.000001*end_box[:lat_modifier]),
+                #     (rand (end_box[:lon1]..end_box[:lon2]))*0.000001*end_box[:lon_modifier])
+                # )
             })
         end
     end
 
     puts "Creating experiences for New York City..."
-    new_york_city_experience_templates.each { |exp| create_new_experiences(exp, Location.find(1), filler_descriptions) }
+    new_york_city_experience_templates.each { |exp| create_new_experiences(exp, new_york_city, filler_descriptions, nyc_map_boxes) }
 
 end
 
@@ -329,4 +375,3 @@ end
         # byebug
     end
 end
-

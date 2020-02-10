@@ -37,6 +37,10 @@ ActiveRecord::Schema.define(version: 2020_02_08_163405) do
     t.integer "quota"
     t.string "image"
     t.string "host_name"
+    t.float "start_lat"
+    t.float "start_lon"
+    t.float "end_lat"
+    t.float "end_lon"
     t.bigint "category_id", null: false
     t.bigint "location_id", null: false
     t.datetime "created_at", precision: 6, null: false
